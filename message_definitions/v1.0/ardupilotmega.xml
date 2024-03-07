@@ -23,6 +23,10 @@
       <entry value="0" name="HEADING_TYPE_COURSE_OVER_GROUND"/>
       <entry value="1" name="HEADING_TYPE_HEADING"/>
     </enum>
+    <enum name="SPEED_TYPE">
+      <entry value="0" name="SPEED_TYPE_AIRSPEED"/>
+      <entry value="1" name="SPEED_TYPE_GROUNDSPEED"/>
+    </enum>
     <!-- ardupilot specific MAV_CMD_* commands -->
     <enum name="MAV_CMD">
       <!-- 200 to 214 used by common.xml -->
@@ -329,7 +333,16 @@
         <param index="6">Empty</param>
         <param index="7">Empty</param>
       </entry>
-      <!-- 43003 MAV_CMD_EXTERNAL_POSITION_ESTIMATE moved to common.xml -->
+      <entry value="43003" name="MAV_CMD_EXTERNAL_POSITION_ESTIMATE" hasLocation="true" isDestination="false">
+        <description>Provide an external position estimate for use when dead-reckoning. This is meant to be used for occasional position resets that may be provided by a external system such as a remote pilot using landmarks over a video link.</description>
+        <param index="1" label="transmission_time" units="s">Timestamp that this message was sent as a time in the transmitters time domain. The sender should wrap this time back to zero based on required timing accuracy for the application and the limitations of a 32 bit float. For example, wrapping at 10 hours would give approximately 1ms accuracy. Recipient must handle time wrap in any timing jitter correction applied to this field. Wrap rollover time should not be at not more than 250 seconds, which would give approximately 10 microsecond accuracy.</param>
+        <param index="2" label="processing_time" units="s">The time spent in processing the sensor data that is the basis for this position. The recipient can use this to improve time alignment of the data. Set to zero if not known.</param>
+        <param index="3" label="accuracy">estimated one standard deviation accuracy of the measurement. Set to NaN if not known.</param>
+        <param index="4">Empty</param>
+        <param index="5" label="Latitude">Latitude</param>
+        <param index="6" label="Longitude">Longitude</param>
+        <param index="7" label="Altitude" units="m">Altitude, not used. Should be sent as NaN. May be supported in a future version of this message.</param>
+      </entry>
     </enum>
     <enum name="SCRIPTING_CMD">
       <entry value="0" name="SCRIPTING_CMD_REPL_START">
@@ -1125,6 +1138,28 @@
     </enum>
   </enums>
   <messages>
+    <message id="12001" name="KEYBOARD_COMMAND_PAYLOAD">
+      <description>sends the number of the pressed keyboard key to be used later for payload control</description>
+      <field type="int16_t" name="key_number">Pressed key number</field>
+    </message>
+    <message id="12002" name="PAYLOAD_STATUS">
+      <description>send status of the payload</description>
+      <field type="uint32_t" name="pos_x">x position </field>
+      <field type="uint32_t" name="pos_y">y position </field>
+      <field type="uint32_t" name="pos_z">z position </field>
+      <field type="uint32_t" name="linear_velocity_x">Linear Velocity x</field>
+      <field type="uint32_t" name="linear_velocity_y">Linear Velocity y</field>
+      <field type="uint32_t" name="linear_velocity_z">Linear Velocity z </field>
+      <field type="uint32_t" name="angular_velocity_x">Angular Velocity x</field>
+      <field type="uint32_t" name="angular_velocity_y">Angular Velocity y</field>
+      <field type="uint32_t" name="angular_velocity_z">Angular Velocity z </field>
+      <field type="char[16]" name="payload_additional_info">Additional informations if needed</field>
+    </message>
+    <message id="12003" name="CUSTOM_PAYLOAD_CONTROL">
+      <description>send commands to control payload</description>
+      <field type="char[16]" name="command_target">specify target to control</field>
+      <field type="int16_t" name="command_value">Value of the command</field>
+    </message>
     <message id="150" name="SENSOR_OFFSETS">
       <description>Offsets and calibrations values for hardware sensors. This makes it easier to debug the calibration process.</description>
       <field type="int16_t" name="mag_ofs_x">Magnetometer X offset.</field>
