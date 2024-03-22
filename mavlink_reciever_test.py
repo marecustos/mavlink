@@ -5,7 +5,7 @@ import os
 os.environ['MAVLINK20'] = '1'
 
 # Create a MAVLink connection
-master = mavutil.mavlink_connection('udp:localhost:14550', dialect ="ardupilotmega")
+master = mavutil.mavlink_connection('udp:localhost:9000', dialect ="ardupilotmega")
 
 # Wait for the heartbeat message to find the system ID
 master.wait_heartbeat()

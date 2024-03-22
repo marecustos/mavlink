@@ -1144,7 +1144,7 @@
     </message>
     <message id="12003" name="CUSTOM_PAYLOAD_CONTROL">
       <description>send commands to control payload</description>
-      <field type="char[16]" name="command_target">specify target to control</field>
+      <field type="char[32]" name="command_target">specify target to control</field>
       <field type="int16_t" name="command_value">Value of the command</field>
     </message>
     <message id="150" name="SENSOR_OFFSETS">
