@@ -22,7 +22,7 @@ else:
     print("Failed to detect target IP address")
 
 # Create a MAVLink connection
-master_send = mavutil.mavlink_connection(f'udpout:{target_ip}:9000', dialect="ardupilotmega",source_system=1)
+master_send = mavutil.mavlink_connection(f'udpout:10.42.0.1:9000', dialect="ardupilotmega",source_system=1)
 master_recv = mavutil.mavlink_connection(f'udp:{target_ip}:9001', dialect ="ardupilotmega")
 
 # Wait for the heartbeat message to find the system ID
