@@ -1,4 +1,5 @@
 from pymavlink import mavutil
+import subprocess
 import os
 
 # Set the MAVLINK20 environment variable to '1'
