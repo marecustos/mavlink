@@ -1147,6 +1147,19 @@
       <field type="char[32]" name="command_target">specify target to control</field>
       <field type="int16_t" name="command_value">Value of the command</field>
     </message>
+    <message id="12004" name="CONNECTED_PAYLOAD">
+      <description>Informations about the connected payload</description>
+      <field type="int16_t" name="payload_id">ID of the payload</field>
+      <field type="char[32]" name="payload_name">name of the payload</field>
+      <field type="char[32]" name="payload_state">state of the payload</field>
+    </message>
+    <message id="12005" name="CONNECTED_PAYLOAD_ACK">
+      <description>acknowledgement message for confirming the reception of connected payload informations.</description>
+      <field type="int16_t" name="payload_id">ID of the payload</field>
+      <field type="char[32]" name="payload_name">name of the payload</field>
+      <field type="char[32]" name="payload_state">state of the payload</field>
+      <field type="uint8_t" name="result">1: payload info well received 0 otherwise</field>
+    </message>
     <message id="150" name="SENSOR_OFFSETS">
       <description>Offsets and calibrations values for hardware sensors. This makes it easier to debug the calibration process.</description>
       <field type="int16_t" name="mag_ofs_x">Magnetometer X offset.</field>
