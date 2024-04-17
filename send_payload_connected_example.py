@@ -19,5 +19,5 @@ while True:
     msg = master_recv.recv_match(type="CONNECTED_PAYLOAD_ACK")
     if msg:
         if (msg.result == 0):
-            master_send.mav.connected_payload_send(payload_id=112,payload_name="seabotX".encode('utf-8'),payload_state="connected".encode('utf-8'))
+            master_send.mav.connected_payload_send(payload_id=112,payload_name="seabotx".encode('utf-8'),payload_state="connected".encode('utf-8'))
             print("sent message")
